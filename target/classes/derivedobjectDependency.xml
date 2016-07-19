@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+  <bean id="parentrectangle" class="org.ashok.springDemo.Rectangle" name="rectangle-name">
+    <!-- <property ref="firstPoint" name="firstPoint"></property>-->
+    <property name="secondPoint">
+      <bean class = "org.ashok.springDemo.Point">
+        <property name="x" value="5"></property>
+        <property name="y" value="0"></property>
+        <!--
+        <constructor-arg value="12"></constructor-arg>
+        <constructor-arg value="13"></constructor-arg>
+      inner beans usage  -->
+      </bean>    
+    </property>
+    <property name="thirdPoint">
+       <bean id="thirdPoint" class = "org.ashok.springDemo.Point">
+        <property name="x" value="5"></property>
+        <property name="y" value="5"></property>
+        <!--
+        <constructor-arg value="98"></constructor-arg>
+        <constructor-arg value="65"></constructor-arg>
+        -->
+      </bean>
+    </property>
+   <!-- <property name="fourthPoint" ref="fourthPoint"></property> -->
+      <!--
+    <constructor-arg ref="firstPoint"></constructor-arg>
+    <constructor-arg ref="secondPoint"></constructor-arg>
+    <constructor-arg ref="thirdPoint"></constructor-arg>
+    <constructor-arg ref="fourthPoint"></constructor-arg>
+    -->
+  </bean>
+  <bean id="rectangle1" class="org.ashok.springDemo.Rectangle" parent="parentrectangle">
+    <property name="firstPoint" ref="firstPoint"></property>
+    <property name="fourthPoint" ref="fourthPoint"></property>
+  </bean>
+  <bean id="firstPoint" class = "org.ashok.springDemo.Point">
+    <property name="x" value="0"></property>
+    <property name="y" value="0"></property>
+    <!--
+    <constructor-arg value="5"></constructor-arg>
+    <constructor-arg value="10"></constructor-arg>
+    -->
+  </bean>
+  <bean id="fourthPoint" class = "org.ashok.springDemo.Point">
+    <property name="x" value="0"></property>
+    <property name="y" value="5"></property>
+    <!-- 
+    <constructor-arg value="54"></constructor-arg>
+    <constructor-arg value="18"></constructor-arg>
+    -->
+  </bean>
+  <alias name="rectangle" alias="rectangle-alias"/>
+</beans>

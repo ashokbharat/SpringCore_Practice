@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+http://www.springframework.org/schema/context
+http://www.springframework.org/schema/context/spring-context.xsd" default-init-method="myInit" default-destroy-method="cleanUp">
+<context:annotation-config></context:annotation-config>
+<bean id="simpleLine" class="org.ashok.springDemo.SimpleLine">
+  <property name="pointA" ref="pointA"></property>
+  <property name="pointB" ref="pointB"></property>
+</bean>
+
+<bean id="circle" class="org.ashok.springDemo.Circle">
+  <!-- <property name="center" ref="pointB"></property> demo of required annotation-->
+</bean>
+<!-- PropertiesPlaceHolderConfigurer -->
+<bean id="pointA" class="org.ashok.springDemo.Point">
+  <property name="x" value="${pointA.pointX}"></property>
+  <property name="y" value="${pointA.pointY}"></property>
+</bean>
+
+<bean id="pointB" class="org.ashok.springDemo.Point">
+  <property name="x" value="234"></property>
+  <property name="y" value="124"></property>
+</bean>
+
+<!-- <bean class="org.ashok.springDemo.DisplayBeanNamesPostProcessor"></bean>-->
+<bean class="org.ashok.springDemo.MyBeanFactoryPostProcessor"></bean>
+<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"></bean>
+
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  <property name="locations" value="placeholder.properties"></property>
+</bean>
+</beans>
